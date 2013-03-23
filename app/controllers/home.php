@@ -1,5 +1,5 @@
 <?php
-class Home_Controller extends Base_Controller{
+class Home_Controller extends BaseController{
 	
 	public function __default(){
 		$this->loadDefault();
