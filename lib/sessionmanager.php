@@ -5,11 +5,12 @@ class SessionManager{
 		
 	public static function start(){
 		session_start();
+        $_SESSION["isLoggedIn"] = TRUE;
 		self::$id   = session_id();
 	}
 	
 	public static function getParameter($key){
-		if(array_key_exists($key, $_SESSION)){
+		if(self::isParameterSet($key)){
 			return $_SESSION[$key];		
 		}
 		else {
@@ -21,9 +22,24 @@ class SessionManager{
 		$_SESSION[$key] = $val;
 	}
 	
+	public static function isParameterSet($key){
+		if(array_key_exists($key, $_SESSION)){
+			return true;
+		}
+		else {
+			throw false;
+		}
+	}
+	
 	public static function destroy(){
 		self::$id = null;
 		session_unset();
 		session_destroy();
 	}
+
+    public static function isLoggedIn(){
+        return $_SESSION["isLoggedIn"];
+    }
+
+
 }

@@ -2,23 +2,19 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Title | <?php echo $title; ?></title>
+		<title>Title | <?php echo $this->viewData->get('title'); ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Natura SKUs">
 		<meta name="author" content="Juan Tejada">
 		
 		<!-- Le styles -->
 		<?php
-			$dir = new DirectoryIterator(CSS_LIB.DS);
-			foreach ($dir as $fileinfo) {
-			    if (!$fileinfo->isDot() && $fileinfo->isFile()) {
-			        echo '<link href="/css/lib/'.$fileinfo->getFilename().'" rel="stylesheet">';
-			    }
+			foreach ($this->viewData->get("csslib") as $css) {
+				echo '<link href="/css/lib/'.$css.'" rel="stylesheet">';
 			}
-			$dir = new DirectoryIterator(CSS.DS);
-			foreach ($dir as $fileinfo) {
-				if (!$fileinfo->isDot() && $fileinfo->isFile()) {
-					echo '<link href="/css/'.$fileinfo->getFilename().'" rel="stylesheet">';
+			if($this->viewData->get("css")){
+				foreach ($this->viewData->get("css") as $css) {
+					echo '<link href="/css/lib/'.$css.'" rel="stylesheet">';
 				}
 			}
 		?>
@@ -29,22 +25,18 @@
 	</head>
 	<body>
 	
-		<?php echo $content; ?>
+		<?php require $this->viewFile; ?>
 	
 		<!-- Le javascript
 	    ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<?php
-			$dir = new DirectoryIterator(JS_LIB.DS);
-			foreach ($dir as $fileinfo) {
-			    if (!$fileinfo->isDot() && $fileinfo->isFile()) {
-			        echo '<script src="/js/lib/'.$fileinfo->getFilename().'"></script>';
-			    }
+			foreach ($this->viewData->get("jslib") as $js) {
+				echo '<script src="/js/lib/'.$js.'"></script>';
 			}
-			$dir = new DirectoryIterator(JS.DS);
-			foreach ($dir as $fileinfo) {
-				if (!$fileinfo->isDot() && $fileinfo->isFile()) {
-					echo '<script src="/js/'.$fileinfo->getFilename().'"></script>';
+			if($this->viewData->get("js")){
+				foreach ($this->viewData->get("js") as $js) {
+					echo '<script src="/js/lib/'.$js.'"></script>';
 				}
 			}
 		?>

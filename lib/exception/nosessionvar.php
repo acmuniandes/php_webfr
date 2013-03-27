@@ -1,4 +1,4 @@
 <?php
-class Exception_404 extends Exception{
+class Exception_NoSessionVar extends Exception{
 	
 }

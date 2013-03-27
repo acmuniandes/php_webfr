@@ -57,5 +57,4 @@ removeMagicQuotes();
 unregisterGlobals();
 
 //Fetch the router
-$router = AutoLoader::loadController("router");
-$router -> __default();
+Router::route();

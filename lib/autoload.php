@@ -18,25 +18,4 @@ class AutoLoader {
 			}
 		}
 	}
-	public static function loadController($controller){
-		$classPath = CONTROLLERS . DS . $controller . '.php';
-		if(is_file($classPath)){
-			require_once $classPath;
-			$className = ucfirst($controller) . '_Controller';
-			if(class_exists($className)){
-				return new $className();
-			} else {
-				throw new Exception_404();
-			} 
-		} else {
-			throw new Exception_404();
-		}
-	}
-	public static function loadView($view, $data){
-		$classPath = VIEWS . DS . str_replace('_', DS, strtolower($view)) . '.php';
-		if(is_file($classPath)){
-			extract($data);
-			require $classPath;
-		}
-	}
 }
